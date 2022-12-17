@@ -14,6 +14,7 @@ import me.neoblade298.neopvp.wars.War;
 import me.neoblade298.neopvp.wars.WarManager;
 
 public class CmdAWarTeam1 implements Subcommand {
+	public static String argOverride = "[create [name] [display] / +-[nation/town/player] [name] / setspawn / setmascotspawn]";
 
 	@Override
 	public String getDescription() {
@@ -37,7 +38,7 @@ public class CmdAWarTeam1 implements Subcommand {
 	
 	@Override
 	public String getArgOverride() {
-		return "[create [name] [display] / +-[nation/town/player] [name] / setspawn / setmascotspawn]";
+		return argOverride;
 	}
 
 	@Override

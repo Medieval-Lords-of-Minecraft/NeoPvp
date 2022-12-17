@@ -51,6 +51,7 @@ public class NeoPvp extends JavaPlugin {
 		mngr.register(new CmdAWarSetWorld());
 		mngr.register(new CmdAWarStart());
 		mngr.register(new CmdAWarEnd());
+		mngr.register(new CmdAWarExit());
 		
 		mngr = new CommandManager("pvp", this);
 		mngr.registerCommandList("help");

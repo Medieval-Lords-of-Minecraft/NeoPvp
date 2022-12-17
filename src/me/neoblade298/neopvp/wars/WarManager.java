@@ -60,6 +60,15 @@ public class WarManager {
 		creatingWar.get(s).displayCreator(s);
 	}
 	
+	public static void exitWarCreator(CommandSender s) {
+		if (!creatingWar.containsKey(s)) {
+			Util.msg(s, "&cYou aren't currently creating a war!");
+			return;
+		}
+		creatingWar.remove(s);
+		Util.msg(s, "&7Successfully exited war creator!");
+	}
+	
 	public static War getWarCreator(CommandSender s) {
 		return creatingWar.get(s);
 	}

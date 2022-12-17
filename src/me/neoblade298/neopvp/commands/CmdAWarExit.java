@@ -1,19 +1,23 @@
 package me.neoblade298.neopvp.commands;
 
 import org.bukkit.command.CommandSender;
+
+import me.neoblade298.neocore.commands.CommandArguments;
 import me.neoblade298.neocore.commands.Subcommand;
 import me.neoblade298.neocore.commands.SubcommandRunner;
+import me.neoblade298.neopvp.wars.WarManager;
 
-public class CmdAWarTeam2 implements Subcommand {
+public class CmdAWarExit implements Subcommand {
+	private static final CommandArguments args = new CommandArguments();
 
 	@Override
 	public String getDescription() {
-		return "Modify team 2";
+		return "Exits war creator";
 	}
 
 	@Override
 	public String getKey() {
-		return "team2";
+		return "exit";
 	}
 
 	@Override
@@ -23,17 +27,17 @@ public class CmdAWarTeam2 implements Subcommand {
 
 	@Override
 	public SubcommandRunner getRunner() {
-		return SubcommandRunner.PLAYER_ONLY;
-	}
-	
-	@Override
-	public String getArgOverride() {
-		return CmdAWarTeam1.argOverride;
+		return SubcommandRunner.BOTH;
 	}
 
 	@Override
 	public void run(CommandSender s, String[] args) {
-		CmdAWarTeam1.runCommand(s, args, 2);
+		WarManager.displayWarCreation(s);
+	}
+	
+	@Override
+	public CommandArguments getArgs() {
+		return args;
 	}
 
 }
