@@ -20,8 +20,8 @@ public class WarManager {
 	private static final int KILL_POINTS = 5;
 	
 	public static void initialize() {
-		Statement stmt = NeoCore.getStatement();
-		Statement delete = NeoCore.getStatement();
+		Statement stmt = NeoCore.getStatement("PvpManager");
+		Statement delete = NeoCore.getStatement("PvpManager");
 		ResultSet rs;
 		try {
 			rs = stmt.executeQuery("SELECT * FROM neopvp_wars;");
@@ -98,7 +98,7 @@ public class WarManager {
 		creatingWar.remove(s);
 		wars.put(war.getKey(), war);
 		
-		Statement stmt = NeoCore.getStatement();
+		Statement stmt = NeoCore.getStatement("PvpManager");
 		try {
 			war.serialize(stmt);
 			stmt.executeBatch();
@@ -114,7 +114,7 @@ public class WarManager {
 		ongoingWars.put(key, war);
 		war.start();
 		
-		Statement stmt = NeoCore.getStatement();
+		Statement stmt = NeoCore.getStatement("PvpManager");
 		try {
 			stmt.addBatch("DELETE FROM neopvp_wars WHERE war = '" + key + "';");
 			stmt.addBatch("DELETE FROM neopvp_warteams WHERE war = '" + key + "';");
@@ -132,7 +132,7 @@ public class WarManager {
 	
 	public static void clearWars() {
 		wars.clear();
-		Statement stmt = NeoCore.getStatement();
+		Statement stmt = NeoCore.getStatement("PvpManager");
 		try {
 			stmt.addBatch("DELETE FROM neopvp_wars;");
 			stmt.addBatch("DELETE FROM neopvp_warteams;");

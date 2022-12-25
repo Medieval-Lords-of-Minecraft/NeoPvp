@@ -42,7 +42,7 @@ public class WarTeam {
 		this.mascotSpawn = Util.stringToLoc(team.getString(5));
 		TownyAPI api = TownyAPI.getInstance();
 
-		Statement stmt = NeoCore.getStatement();
+		Statement stmt = NeoCore.getStatement("PvpManager");
 		ResultSet rs = stmt.executeQuery("SELECT * FROM neopvp_warwhitelists WHERE war = '" + war + "' AND team = '" + this.key + "';");
 		while (rs.next()) {
 			if (rs.getInt(3) == NATIONTYPE) {

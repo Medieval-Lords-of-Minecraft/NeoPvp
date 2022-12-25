@@ -32,7 +32,7 @@ public class NeoPvp extends JavaPlugin {
 		}
 		initCommands();
 		
-		NeoCore.registerIOComponent(this, new PvpManager());
+		NeoCore.registerIOComponent(this, new PvpManager(), "PvpManager");
 		Bukkit.getPluginManager().registerEvents(new PvpListener(), this);
 	}
 	

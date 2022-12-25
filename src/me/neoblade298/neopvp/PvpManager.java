@@ -69,7 +69,7 @@ public class PvpManager implements IOComponent {
 		killerAcc.incrementWins();
 		killedAcc.incrementLosses();
 
-		// TODO
+		// War kills
 		handleWarKill();
 	}
 
@@ -79,16 +79,6 @@ public class PvpManager implements IOComponent {
 
 	@Override
 	public void cleanup(Statement arg0, Statement arg1) {
-	}
-
-	@Override
-	public String getKey() {
-		return "PvpManager";
-	}
-	
-	@Override
-	public int getPriority() {
-		return -1;
 	}
 
 	@Override
