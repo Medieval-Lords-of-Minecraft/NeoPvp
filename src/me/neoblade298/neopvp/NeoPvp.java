@@ -23,6 +23,7 @@ public class NeoPvp extends JavaPlugin {
 	private static NeoPvp inst;
 	private static ArrayList<Manager> mngrs = new ArrayList<Manager>();
 	public static StateFlag PROTECTION_ALLOWED_FLAG;
+	public static final int PVP_PROTECTION_COST = 50000;
 	
 	public void onEnable() {
 		Bukkit.getServer().getLogger().info("NeoPvp Enabled");

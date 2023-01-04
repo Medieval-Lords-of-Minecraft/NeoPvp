@@ -35,7 +35,7 @@ public class PvpAccount {
 	// Exclusively for first time login
 	public PvpAccount(UUID uuid) {
 		this.uuid = uuid;
-		this.protectionExpires = System.currentTimeMillis() + (1000 * 60 * 60 * 24); // 24 hours
+		this.protectionExpires = System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 7); // 7 days
 		this.elo = 1800;
 		this.uniqueKills = new HashSet<UUID>();
 		
@@ -183,7 +183,7 @@ public class PvpAccount {
 		if (protectionExpires < System.currentTimeMillis()) {
 			ComponentBuilder b = new ComponentBuilder(prot + "§4N/A ");
 			if (displayToSelf) {
-				b.append("§7§o[Click to buy (§e5000g §7/ §e30m§7)]")
+				b.append("§7§o[Click to buy (§e" + NeoPvp.PVP_PROTECTION_COST + "g §7/ §e30m§7)]")
 				.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/pvp buyprotection"))
 				.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("/pvp buyprotection")));
 			}

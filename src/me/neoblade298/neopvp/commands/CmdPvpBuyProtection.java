@@ -7,10 +7,11 @@ import me.neoblade298.neocore.NeoCore;
 import me.neoblade298.neocore.commands.CommandArguments;
 import me.neoblade298.neocore.commands.Subcommand;
 import me.neoblade298.neocore.commands.SubcommandRunner;
+import me.neoblade298.neopvp.NeoPvp;
 import me.neoblade298.neopvp.PvpManager;
 
 public class CmdPvpBuyProtection implements Subcommand {
-	private static final int PRICE = 5000;
+	private static final int PRICE = NeoPvp.PVP_PROTECTION_COST;
 	private static final int MINUTES = 30;
 	private static final CommandArguments args = new CommandArguments();
 
