@@ -64,11 +64,12 @@ public class PvpAccount {
 		}
 	}
 	
-	public void loadPlayer() {
-		this.p = Bukkit.getPlayer(this.uuid);
+	private void loadPlayer() {
+		if (this.p == null) this.p = Bukkit.getPlayer(this.uuid);
 	}
 	
 	public void removeProtection() {
+		loadPlayer();
 		// If statement for in case a scheduler removes protection when it's already gone
 		if (this.protectionExpires != -1) {
 			this.protectionExpires = -1;
@@ -77,6 +78,7 @@ public class PvpAccount {
 	}
 	
 	public void addProtection(long timeInMillis) {
+		loadPlayer();
 		if (protectionExpires < System.currentTimeMillis()) {
 			protectionExpires = System.currentTimeMillis();
 		}
@@ -173,9 +175,7 @@ public class PvpAccount {
 	}
 	
 	public void displayAccount(CommandSender s) {
-		if (p == null) {
-			loadPlayer();
-		}
+		loadPlayer();
 		
 		String prot = "§6Protection: ";
 		Util.msg(s, "&6===[&e" + p.getName() + "&6]===", false);
@@ -219,6 +219,7 @@ public class PvpAccount {
 	}
 	
 	public void redeemBounty(CommandSender s) {
+		loadPlayer();
 		NeoCore.getEconomy().depositPlayer(p, pvpBalance);
 		Util.msg(s, "&7Successfully redeemed &e" + pvpBalance + "g&7.");
 		pvpBalance = 0;
@@ -247,9 +248,7 @@ public class PvpAccount {
 	}
 	
 	public Player getPlayer() {
-		if (this.p == null) {
-			loadPlayer();
-		}
+		loadPlayer();
 		return this.p;
 	}
 	

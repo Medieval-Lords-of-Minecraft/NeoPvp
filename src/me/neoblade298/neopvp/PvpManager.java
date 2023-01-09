@@ -82,9 +82,7 @@ public class PvpManager implements IOComponent {
 	}
 
 	@Override
-	public void loadPlayer(Player p, Statement stmt) {
-		accounts.get(p.getUniqueId()).loadPlayer();
-	}
+	public void loadPlayer(Player p, Statement stmt) {	}
 
 	@Override
 	public void preloadPlayer(OfflinePlayer p, Statement stmt) {
