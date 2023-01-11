@@ -13,6 +13,9 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.object.TownBlockType;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -95,11 +98,20 @@ public class PvpListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onDeath(PlayerDeathEvent e) {
-		// Ignore event
+		// Ignore event in certain worlds
 		String world = e.getEntity().getWorld().getName();
 		if (world.equalsIgnoreCase("Event") || world.equalsIgnoreCase("ClassPVP")) return;
+
 		Player victim = e.getEntity();
 		Player killer = victim.getKiller();
+		
+		// Also ignore if either is in a towny arena plot
+		TownyAPI api = TownyAPI.getInstance();
+		if(api.getTownyWorld(world) == null) return;
+		TownBlock victimBlock = api.getTownBlock(victim);
+		TownBlock killerBlock = api.getTownBlock(killer);
+		if(victimBlock != null && victimBlock.getType() == TownBlockType.ARENA) return;
+		if(killerBlock != null && killerBlock.getType() == TownBlockType.ARENA) return;
 		
 		// War logic takes priority, ignores /pvp
 		if (WarManager.handleKill(killer, victim)) return;
