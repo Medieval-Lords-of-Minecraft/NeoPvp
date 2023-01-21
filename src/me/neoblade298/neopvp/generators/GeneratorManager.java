@@ -4,13 +4,14 @@ import java.io.File;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import me.neoblade298.neocore.NeoCore;
-import me.neoblade298.neocore.bungee.BungeeAPI;
-import me.neoblade298.neocore.exceptions.NeoIOException;
-import me.neoblade298.neocore.interfaces.Manager;
-import me.neoblade298.neocore.io.FileLoader;
-import me.neoblade298.neocore.scheduler.ScheduleInterval;
-import me.neoblade298.neocore.scheduler.SchedulerAPI;
+
+import me.neoblade298.neocore.bukkit.Manager;
+import me.neoblade298.neocore.bukkit.NeoCore;
+import me.neoblade298.neocore.bukkit.bungee.BungeeAPI;
+import me.neoblade298.neocore.bukkit.scheduler.ScheduleInterval;
+import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI;
+import me.neoblade298.neocore.shared.exceptions.NeoIOException;
+import me.neoblade298.neocore.shared.io.FileLoader;
 import me.neoblade298.neopvp.NeoPvp;
 
 public class GeneratorManager implements Manager {

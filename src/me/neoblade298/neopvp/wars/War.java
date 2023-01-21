@@ -17,9 +17,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 
-import me.neoblade298.neocore.bungee.BungeeAPI;
-import me.neoblade298.neocore.scheduler.SchedulerAPI;
-import me.neoblade298.neocore.scheduler.SchedulerAPI.CoreRunnable;
+import me.neoblade298.neocore.bukkit.bungee.BungeeAPI;
+import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI;
+import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI.CoreRunnable;
 import me.neoblade298.neocore.util.Util;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;

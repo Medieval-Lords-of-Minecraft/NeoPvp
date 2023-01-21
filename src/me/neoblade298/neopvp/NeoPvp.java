@@ -10,10 +10,10 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 
-import me.neoblade298.neocore.NeoCore;
-import me.neoblade298.neocore.commands.CommandManager;
-import me.neoblade298.neocore.instancing.InstanceType;
-import me.neoblade298.neocore.interfaces.Manager;
+import me.neoblade298.neocore.bukkit.NeoCore;
+import me.neoblade298.neocore.bukkit.commands.CommandManager;
+import me.neoblade298.neocore.bukkit.InstanceType;
+import me.neoblade298.neocore.bukkit.Manager;
 import me.neoblade298.neopvp.commands.*;
 import me.neoblade298.neopvp.generators.GeneratorManager;
 import me.neoblade298.neopvp.listeners.PvpListener;

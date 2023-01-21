@@ -17,7 +17,7 @@ import com.palmergames.bukkit.towny.object.Town;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import me.neoblade298.neocore.NeoCore;
+import me.neoblade298.neocore.bukkit.NeoCore;
 import me.neoblade298.neocore.util.Util;
 
 public class WarTeam {

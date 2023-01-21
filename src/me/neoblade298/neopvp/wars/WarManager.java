@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.neoblade298.neocore.NeoCore;
+import me.neoblade298.neocore.bukkit.NeoCore;
 import me.neoblade298.neocore.util.Util;
 
 public class WarManager {

@@ -3,10 +3,10 @@ package me.neoblade298.neopvp.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.neoblade298.neocore.NeoCore;
-import me.neoblade298.neocore.commands.CommandArguments;
-import me.neoblade298.neocore.commands.Subcommand;
-import me.neoblade298.neocore.commands.SubcommandRunner;
+import me.neoblade298.neocore.bukkit.NeoCore;
+import me.neoblade298.neocore.bukkit.commands.CommandArguments;
+import me.neoblade298.neocore.bukkit.commands.Subcommand;
+import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
 import me.neoblade298.neopvp.NeoPvp;
 import me.neoblade298.neopvp.PvpManager;
 

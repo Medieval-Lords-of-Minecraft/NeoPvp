@@ -11,8 +11,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import me.neoblade298.neocore.NeoCore;
-import me.neoblade298.neocore.io.IOComponent;
+import me.neoblade298.neocore.bukkit.NeoCore;
+import me.neoblade298.neocore.bukkit.io.IOComponent;
 
 public class PvpManager implements IOComponent {
 	private static HashMap<UUID, PvpAccount> accounts = new HashMap<UUID, PvpAccount>();

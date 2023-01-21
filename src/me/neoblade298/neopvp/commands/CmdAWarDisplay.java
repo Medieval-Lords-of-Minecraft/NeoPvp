@@ -2,8 +2,8 @@ package me.neoblade298.neopvp.commands;
 
 import org.bukkit.command.CommandSender;
 
-import me.neoblade298.neocore.commands.Subcommand;
-import me.neoblade298.neocore.commands.SubcommandRunner;
+import me.neoblade298.neocore.bukkit.commands.Subcommand;
+import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
 import me.neoblade298.neopvp.wars.WarManager;
 
 public class CmdAWarDisplay implements Subcommand {
