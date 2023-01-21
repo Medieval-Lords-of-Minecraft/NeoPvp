@@ -11,7 +11,7 @@ import me.neoblade298.neocore.bukkit.bungee.BungeeAPI;
 import me.neoblade298.neocore.bukkit.scheduler.ScheduleInterval;
 import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI;
 import me.neoblade298.neocore.shared.exceptions.NeoIOException;
-import me.neoblade298.neocore.shared.io.FileLoader;
+import me.neoblade298.neocore.bukkit.io.FileLoader;
 import me.neoblade298.neopvp.NeoPvp;
 
 public class GeneratorManager implements Manager {
