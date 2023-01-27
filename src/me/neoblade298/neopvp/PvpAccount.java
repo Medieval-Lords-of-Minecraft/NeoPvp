@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 import me.neoblade298.neocore.bukkit.NeoCore;
 import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI;
 import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI.CoreRunnable;
-import me.neoblade298.neocore.util.PaginatedList;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.Util;
+import me.neoblade298.neocore.shared.util.PaginatedList;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
@@ -239,7 +239,7 @@ public class PvpAccount {
 			for (UUID uuid : pagedKills.get(page)) {
 				Util.msg(s, "&7- &e" + Bukkit.getOfflinePlayer(uuid).getName());
 			}
-			pagedKills.displayFooter(s, page, "/pvp uniquekills " + p.getName() + " " + (page + 1), "/pvp uniquekills " + p.getName() + " " + (page - 1));
+			s.spigot().sendMessage(pagedKills.getFooter(page, "/pvp uniquekills " + p.getName() + " " + (page + 1), "/pvp uniquekills " + p.getName() + " " + (page - 1)));
 		}
 	}
 	

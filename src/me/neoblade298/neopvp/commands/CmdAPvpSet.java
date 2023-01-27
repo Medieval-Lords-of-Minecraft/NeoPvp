@@ -1,39 +1,18 @@
 package me.neoblade298.neopvp.commands;
 
-import java.util.Arrays;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import me.neoblade298.neocore.bukkit.commands.CommandArgument;
-import me.neoblade298.neocore.bukkit.commands.CommandArguments;
+import me.neoblade298.neocore.shared.commands.Arg;
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
+import me.neoblade298.neocore.bukkit.util.Util;
 import me.neoblade298.neopvp.PvpAccount;
 import me.neoblade298.neopvp.PvpManager;
 
-public class CmdAPvpSet implements Subcommand {
-	private static final CommandArguments args = new CommandArguments(Arrays.asList(new CommandArgument("player"), new CommandArgument("wins/losses/bounty/elo"),
-			new CommandArgument("amount")));
-
-	@Override
-	public String getDescription() {
-		return "Sets a field in the player's pvp account";
-	}
-
-	@Override
-	public String getKey() {
-		return "set";
-	}
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.BOTH;
+public class CmdAPvpSet extends Subcommand {
+	public CmdAPvpSet(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
+		args.add(new Arg("player"), new Arg("wins/losses/bounty/elo"), new Arg("amount"));
 	}
 
 	@Override
@@ -62,10 +41,4 @@ public class CmdAPvpSet implements Subcommand {
 			break;
 		}
 	}
-	
-	@Override
-	public CommandArguments getArgs() {
-		return args;
-	}
-
 }

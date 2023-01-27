@@ -1,5 +1,6 @@
 package me.neoblade298.neopvp.wars;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,8 @@ import com.palmergames.bukkit.towny.object.Town;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import me.neoblade298.neocore.bukkit.NeoCore;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.Util;
+
 
 public class WarTeam {
 	private War war;
@@ -34,38 +36,44 @@ public class WarTeam {
 	
 	private static final String MASCOT_NAME = "WarMascot";
 	
-	public WarTeam(String war, ResultSet team) throws SQLException {
-		this.war = WarManager.getWar(team.getString(1));
-		this.key = team.getString(2);
-		this.display = team.getString(3);
-		this.spawn = Util.stringToLoc(team.getString(4));
-		this.mascotSpawn = Util.stringToLoc(team.getString(5));
-		TownyAPI api = TownyAPI.getInstance();
+	public WarTeam(String war, ResultSet team) {
+		try (Connection con = NeoCore.getConnection("PvpManager");
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM neopvp_warwhitelists WHERE war = '" + war + "' AND team = '" + this.key + "';");) {
+			this.war = WarManager.getWar(team.getString(1));
+			this.key = team.getString(2);
+			this.display = team.getString(3);
+			this.spawn = Util.stringToLoc(team.getString(4));
+			this.mascotSpawn = Util.stringToLoc(team.getString(5));
+			TownyAPI api = TownyAPI.getInstance();
 
-		Statement stmt = NeoCore.getStatement("PvpManager");
-		ResultSet rs = stmt.executeQuery("SELECT * FROM neopvp_warwhitelists WHERE war = '" + war + "' AND team = '" + this.key + "';");
-		while (rs.next()) {
-			if (rs.getInt(3) == NATIONTYPE) {
-				Nation n = api.getNation(UUID.fromString(rs.getString(4)));
-				if (n != null) {
-					nations.add(n);
+			
+			while (rs.next()) {
+				if (rs.getInt(3) == NATIONTYPE) {
+					Nation n = api.getNation(UUID.fromString(rs.getString(4)));
+					if (n != null) {
+						nations.add(n);
+					}
+					else {
+						Bukkit.getLogger().warning("[NeoPvp] Failed to load nation " + rs.getString(4) + " for war " + this.war.getKey());
+					}
+				}
+				else if (rs.getInt(3) == TOWNTYPE) {
+					Town t = api.getTown(UUID.fromString(rs.getString(4)));
+					if (t != null) {
+						whitelistedTowns.add(t);
+					}
+					else {
+						Bukkit.getLogger().warning("[NeoPvp] Failed to load town " + rs.getString(4) + " for war " + this.war.getKey());
+					}
 				}
 				else {
-					Bukkit.getLogger().warning("[NeoPvp] Failed to load nation " + rs.getString(4) + " for war " + this.war.getKey());
+					whitelistedPlayers.add(rs.getString(4));
 				}
 			}
-			else if (rs.getInt(3) == TOWNTYPE) {
-				Town t = api.getTown(UUID.fromString(rs.getString(4)));
-				if (t != null) {
-					whitelistedTowns.add(t);
-				}
-				else {
-					Bukkit.getLogger().warning("[NeoPvp] Failed to load town " + rs.getString(4) + " for war " + this.war.getKey());
-				}
-			}
-			else {
-				whitelistedPlayers.add(rs.getString(4));
-			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	

@@ -8,37 +8,18 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
+import me.neoblade298.neocore.bukkit.util.Util;
+import me.neoblade298.neocore.shared.util.SharedUtil;
 import me.neoblade298.neopvp.wars.War;
 import me.neoblade298.neopvp.wars.WarManager;
 
-public class CmdAWarTeam1 implements Subcommand {
-	public static String argOverride = "[create [name] [display] / +-[nation/town/player] [name] / setspawn / setmascotspawn]";
-
-	@Override
-	public String getDescription() {
-		return "Modify team 1";
-	}
-
-	@Override
-	public String getKey() {
-		return "team1";
-	}
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.PLAYER_ONLY;
-	}
+public class CmdAWarTeam1 extends Subcommand {
+	public static String argOverride = "[create] [name] [display] / +-[nation/town/player] [name] / setspawn / setmascotspawn]";
 	
-	@Override
-	public String getArgOverride() {
-		return argOverride;
+	public CmdAWarTeam1(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
+		args.setOverride(argOverride);
 	}
 
 	@Override
@@ -56,7 +37,7 @@ public class CmdAWarTeam1 implements Subcommand {
 		switch (arg1) {
 		case "create":
 			String key = args[1];
-			String name = Util.translateColors(Util.connectArgs(args, 2));
+			String name = SharedUtil.translateColors(SharedUtil.connectArgs(args, 2));
 			war.createTeam(team, key, name);
 			break;
 		case "+nation":
@@ -146,5 +127,4 @@ public class CmdAWarTeam1 implements Subcommand {
 		
 		war.displayCreator(s);
 	}
-
 }

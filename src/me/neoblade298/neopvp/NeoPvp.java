@@ -11,7 +11,8 @@ import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 
 import me.neoblade298.neocore.bukkit.NeoCore;
-import me.neoblade298.neocore.bukkit.commands.CommandManager;
+import me.neoblade298.neocore.bukkit.commands.SubcommandManager;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
 import me.neoblade298.neocore.bukkit.InstanceType;
 import me.neoblade298.neocore.bukkit.Manager;
 import me.neoblade298.neopvp.commands.*;
@@ -38,41 +39,40 @@ public class NeoPvp extends JavaPlugin {
 	}
 	
 	private void initCommands() {
-		CommandManager mngr = new CommandManager("adminwar", "mycommand.staff", ChatColor.DARK_RED, this);
+		SubcommandManager mngr = new SubcommandManager("adminwar", "mycommand.staff", ChatColor.DARK_RED, this);
 		mngr.registerCommandList("");
-		mngr.register(new CmdAWarCreate());
-		mngr.register(new CmdAWarClear());
-		mngr.register(new CmdAWarDisplay());
-		mngr.register(new CmdAWarInfo());
-		mngr.register(new CmdAWarInfo());
-		mngr.register(new CmdAWarLimit());
-		mngr.register(new CmdAWarNew());
-		mngr.register(new CmdAWarTeam1());
-		mngr.register(new CmdAWarTeam2());
-		mngr.register(new CmdAWarSetWorld());
-		mngr.register(new CmdAWarStart());
-		mngr.register(new CmdAWarEnd());
-		mngr.register(new CmdAWarExit());
+		mngr.register(new CmdAWarCreate("create", "Completes war creation and schedules it", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarClear("clear", "Removes all wars from existence", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarDisplay("display", "Sets display name of war", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarInfo("info", "Shows war creator", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarLimit("limit", "Sets max players in a team", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarNew("new", "Starts creation of a war", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarTeam1("team1", null, null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarTeam2("team2", null, null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarSetWorld("setworld", "Sets world of war", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarStart("start", "Starts war", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarEnd("end", "Ends War", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAWarExit("exit", "Exits war creation", null, SubcommandRunner.BOTH));
 		
-		mngr = new CommandManager("pvp", this);
+		mngr = new SubcommandManager("pvp", null, ChatColor.RED, this);
 		mngr.registerCommandList("help");
-		mngr.register(new CmdPvpBase());
-		mngr.register(new CmdPvpBuyProtection());
-		mngr.register(new CmdPvpRemoveProtection());
-		mngr.register(new CmdPvpRedeem());
-		mngr.register(new CmdPvpUniqueKills());
+		mngr.register(new CmdPvpBase("", "Views player's pvp stats", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdPvpBuyProtection("buyprotection", "Purchases 30 minutes of protection for " + PVP_PROTECTION_COST + "g", null, SubcommandRunner.PLAYER_ONLY));
+		mngr.register(new CmdPvpRemoveProtection("removeprotection", "Removes your protection", null, SubcommandRunner.PLAYER_ONLY));
+		mngr.register(new CmdPvpRedeem("redeem", "Redeems your current bounty and resets it", null, SubcommandRunner.PLAYER_ONLY));
+		mngr.register(new CmdPvpUniqueKills("uniquekills", "Lists unique kills", null, SubcommandRunner.BOTH));
 		
-		mngr = new CommandManager("adminpvp", "mycommand.staff", ChatColor.DARK_RED, this);
+		mngr = new SubcommandManager("adminpvp", "mycommand.staff", ChatColor.DARK_RED, this);
 		mngr.registerCommandList("");
-		mngr.register(new CmdAPvpAddProtection());
-		mngr.register(new CmdAPvpRemoveProtection());
-		mngr.register(new CmdAPvpReload());
-		mngr.register(new CmdAPvpSet());
+		mngr.register(new CmdAPvpAddProtection("addprotection", "Adds protection time to a player", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAPvpRemoveProtection("removeprotection", "Removes protection time from a player", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAPvpReload("reload", "Reloads plugin", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdAPvpSet("set", "Sets a field in the player's pvp account", null, SubcommandRunner.BOTH));
 		
-		mngr = new CommandManager("war", this);
+		mngr = new SubcommandManager("war", null, ChatColor.RED, this);
 		mngr.registerCommandList("help");
-		mngr.register(new CmdWarBase());
-		mngr.register(new CmdWarSpawn());
+		mngr.register(new CmdWarBase("", "Views current war status", null, SubcommandRunner.BOTH));
+		mngr.register(new CmdWarSpawn("spawn", "Teleport to current war if you're in one", null, SubcommandRunner.BOTH));
 	}
 	
 	@Override

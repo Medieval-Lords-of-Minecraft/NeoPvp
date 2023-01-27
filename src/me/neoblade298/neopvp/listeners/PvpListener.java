@@ -24,7 +24,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import com.sk89q.worldguard.protection.regions.RegionQuery.QueryOption;
 
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.Util;
 import me.neoblade298.neopvp.NeoPvp;
 import me.neoblade298.neopvp.PvpAccount;
 import me.neoblade298.neopvp.PvpManager;

@@ -4,35 +4,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.neoblade298.neocore.bukkit.commands.CommandArgument;
-import me.neoblade298.neocore.bukkit.commands.CommandArguments;
+import me.neoblade298.neocore.shared.commands.Arg;
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
+import me.neoblade298.neocore.bukkit.util.Util;
 import me.neoblade298.neopvp.PvpAccount;
 import me.neoblade298.neopvp.PvpManager;
 
-public class CmdPvpBase implements Subcommand {
-	private static final CommandArguments args = new CommandArguments(new CommandArgument("player", false));
-
-	@Override
-	public String getDescription() {
-		return "Views player's pvp account stats";
-	}
-
-	@Override
-	public String getKey() {
-		return "";
-	}
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.BOTH;
+public class CmdPvpBase extends Subcommand {
+	public CmdPvpBase(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
+		args.add(new Arg("player"));
 	}
 
 	@Override
@@ -50,10 +32,4 @@ public class CmdPvpBase implements Subcommand {
 			}
 		}
 	}
-	
-	@Override
-	public CommandArguments getArgs() {
-		return args;
-	}
-
 }

@@ -1,39 +1,18 @@
 package me.neoblade298.neopvp.commands;
 
-import java.util.Arrays;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.neoblade298.neocore.bukkit.commands.CommandArgument;
-import me.neoblade298.neocore.bukkit.commands.CommandArguments;
+import me.neoblade298.neocore.shared.commands.Arg;
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
 import me.neoblade298.neopvp.PvpManager;
 
-public class CmdPvpUniqueKills implements Subcommand {
-	private static final CommandArguments args = new CommandArguments(Arrays.asList(new CommandArgument("player", false),
-			new CommandArgument("page", false)));
-
-	@Override
-	public String getDescription() {
-		return "Lists unique kills";
-	}
-
-	@Override
-	public String getKey() {
-		return "uniquekills";
-	}
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.PLAYER_ONLY;
+public class CmdPvpUniqueKills extends Subcommand {
+	public CmdPvpUniqueKills(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
+		args.add(new Arg("player", false),new Arg("page", false));
 	}
 
 	@Override
@@ -60,10 +39,4 @@ public class CmdPvpUniqueKills implements Subcommand {
 			PvpManager.getAccount(p).displayUniqueKills(s, page);
 		}
 	}
-	
-	@Override
-	public CommandArguments getArgs() {
-		return args;
-	}
-
 }

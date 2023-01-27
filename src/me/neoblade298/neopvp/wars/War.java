@@ -20,7 +20,8 @@ import com.palmergames.bukkit.towny.object.Town;
 import me.neoblade298.neocore.bukkit.bungee.BungeeAPI;
 import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI;
 import me.neoblade298.neocore.bukkit.scheduler.SchedulerAPI.CoreRunnable;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.Util;
+import me.neoblade298.neocore.shared.util.SharedUtil;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.hover.content.Text;
@@ -224,7 +225,7 @@ public class War {
 		int total = points + healthLost;
 		String msg = "&6Team " + num + " &7(&c" + team.getDisplay() + "&7): &f" + total;
 
-		ComponentBuilder builder = new ComponentBuilder(Util.translateColors(msg))
+		ComponentBuilder builder = new ComponentBuilder(SharedUtil.translateColors(msg))
 				.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(buildTeamHover(team, enemy))));
 		s.spigot().sendMessage(builder.create());
 	}
@@ -263,7 +264,7 @@ public class War {
 		msg += "\n";
 		
 		msg += "&6Kills&7: &e" + team.getKills() + "\n&6Deaths&7: &e" + team.getDeaths() + "\n&6Enemy Mascot Damage&7: &e" + enemy.getMascotHealthLost();
-		return Util.translateColors(msg);
+		return SharedUtil.translateColors(msg);
 	}
 	
 	public String getKey() {

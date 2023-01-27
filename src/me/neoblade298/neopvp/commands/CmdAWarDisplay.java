@@ -3,29 +3,14 @@ package me.neoblade298.neopvp.commands;
 import org.bukkit.command.CommandSender;
 
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
 import me.neoblade298.neopvp.wars.WarManager;
 
-public class CmdAWarDisplay implements Subcommand {
+public class CmdAWarDisplay extends Subcommand {
 
-	@Override
-	public String getDescription() {
-		return "Sets display name of the war";
-	}
-
-	@Override
-	public String getKey() {
-		return "display";
-	}
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.BOTH;
+	public CmdAWarDisplay(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
+		args.setOverride("[display]");
 	}
 
 	@Override
@@ -37,10 +22,4 @@ public class CmdAWarDisplay implements Subcommand {
 		WarManager.getWarCreator(s).setDisplay(display);
 		WarManager.displayWarCreation(s);
 	}
-	
-	@Override
-	public String getArgOverride() {
-		return "[display]";
-	}
-
 }

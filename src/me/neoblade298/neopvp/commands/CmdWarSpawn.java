@@ -3,36 +3,18 @@ package me.neoblade298.neopvp.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.neoblade298.neocore.bukkit.commands.CommandArguments;
+
 import me.neoblade298.neocore.bukkit.commands.Subcommand;
-import me.neoblade298.neocore.bukkit.commands.SubcommandRunner;
+import me.neoblade298.neocore.shared.commands.SubcommandRunner;
 import me.neoblade298.neocore.bukkit.teleport.TeleportAPI;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.Util;
 import me.neoblade298.neopvp.wars.War;
 import me.neoblade298.neopvp.wars.WarManager;
 import me.neoblade298.neopvp.wars.WarTeam;
 
-public class CmdWarSpawn implements Subcommand {
-	private static final CommandArguments args = new CommandArguments();
-
-	@Override
-	public String getDescription() {
-		return "Teleport to the current war if you're a fighter";
-	}
-
-	@Override
-	public String getKey() {
-		return "spawn";
-	}
-
-	@Override
-	public String getPermission() {
-		return null;
-	}
-
-	@Override
-	public SubcommandRunner getRunner() {
-		return SubcommandRunner.PLAYER_ONLY;
+public class CmdWarSpawn extends Subcommand {
+	public CmdWarSpawn(String key, String desc, String perm, SubcommandRunner runner) {
+		super(key, desc, perm, runner);
 	}
 
 	@Override
@@ -54,10 +36,4 @@ public class CmdWarSpawn implements Subcommand {
 		}
 		Util.msg(s, "&cYou're not part of any ongoing war!");
 	}
-
-	@Override
-	public CommandArguments getArgs() {
-		return args;
-	}
-
 }

@@ -1,5 +1,6 @@
 package me.neoblade298.neopvp.wars;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.neoblade298.neocore.bukkit.NeoCore;
-import me.neoblade298.neocore.util.Util;
+import me.neoblade298.neocore.bukkit.util.Util;
 
 public class WarManager {
 	private static HashMap<String, War> wars = new HashMap<String, War>();
@@ -20,11 +21,10 @@ public class WarManager {
 	private static final int KILL_POINTS = 5;
 	
 	public static void initialize() {
-		Statement stmt = NeoCore.getStatement("PvpManager");
-		Statement delete = NeoCore.getStatement("PvpManager");
-		ResultSet rs;
-		try {
-			rs = stmt.executeQuery("SELECT * FROM neopvp_wars;");
+		try (Connection con = NeoCore.getConnection("PvpManager");
+				Statement stmt = con.createStatement();
+				Statement delete = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM neopvp_wars;");){
 			
 			while(rs.next()) {
 				String key = rs.getString(1);
@@ -98,8 +98,8 @@ public class WarManager {
 		creatingWar.remove(s);
 		wars.put(war.getKey(), war);
 		
-		Statement stmt = NeoCore.getStatement("PvpManager");
-		try {
+		try (Connection con = NeoCore.getConnection("PvpManager");
+				Statement stmt = con.createStatement()) {
 			war.serialize(stmt);
 			stmt.executeBatch();
 		}
@@ -113,9 +113,9 @@ public class WarManager {
 		War war = wars.remove(key);
 		ongoingWars.put(key, war);
 		war.start();
-		
-		Statement stmt = NeoCore.getStatement("PvpManager");
-		try {
+
+		try (Connection con = NeoCore.getConnection("PvpManager");
+				Statement stmt = con.createStatement()) {
 			stmt.addBatch("DELETE FROM neopvp_wars WHERE war = '" + key + "';");
 			stmt.addBatch("DELETE FROM neopvp_warteams WHERE war = '" + key + "';");
 			stmt.addBatch("DELETE FROM neopvp_warwhitelists WHERE war = '" + key + "';");
@@ -132,8 +132,8 @@ public class WarManager {
 	
 	public static void clearWars() {
 		wars.clear();
-		Statement stmt = NeoCore.getStatement("PvpManager");
-		try {
+		try (Connection con = NeoCore.getConnection("PvpManager");
+				Statement stmt = con.createStatement()){
 			stmt.addBatch("DELETE FROM neopvp_wars;");
 			stmt.addBatch("DELETE FROM neopvp_warteams;");
 			stmt.addBatch("DELETE FROM neopvp_warwhitelists;");
